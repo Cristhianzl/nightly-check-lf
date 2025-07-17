@@ -240,10 +240,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - Test your changes thoroughly
 - Update documentation as needed
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - [Langflow](https://github.com/langflow-ai/langflow) for the amazing open-source project
