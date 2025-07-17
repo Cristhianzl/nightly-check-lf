@@ -130,11 +130,77 @@ Counter animations and transitions can be customized in the `Counter` component:
 
 ## 📊 Metrics Calculated
 
-- **Days Without Incident**: Consecutive days since last failure
-- **Success Rate**: Percentage of successful builds
-- **Total Builds**: Total number of workflow runs (from GitHub API)
-- **Last Incident Date**: Date of most recent failure
-- **Current Streak**: Number of consecutive successful builds
+### Days Without Incident
+
+- **Calculation**: Counts consecutive days since the last build failure
+- **Method**: Iterates through recent builds from newest to oldest, stopping at the first failure
+- **Display**: Shows the maximum number of days since any successful build if no failures found in recent history
+
+### Success Rate
+
+- **Calculation**: `(Successful Builds / Total Builds) × 100`
+- **Data Source**: Based on the last 50 completed workflow runs from GitHub Actions API
+- **Classification**:
+  - ✅ **Success**: `run.conclusion === "success"`
+  - ❌ **Failure**: All other conclusions (failure, cancelled, etc.)
+- **Scope**: Recent snapshot (last 50 runs) rather than all-time historical average
+
+### Total Builds
+
+- **Source**: Total count from GitHub Actions API (`runsData.total_count`)
+- **Fallback**: Uses `builds.length` if total count is unavailable
+- **Simulated Data**: Shows 672 total builds when API is unavailable
+
+### Last Incident Date
+
+- **Definition**: Date of the most recent build failure
+- **Format**: Full date (e.g., "July 16, 2024")
+- **Display**: Shows "Never" if no failures found in recent builds
+
+### Current Streak
+
+- **Calculation**: Number of consecutive successful builds starting from the most recent
+- **Method**: Counts successful builds until the first failure is encountered
+- **Purpose**: Shows ongoing reliability trend
+
+## 🔧 Technical Rules & Constraints
+
+### API Limitations
+
+- **Rate Limits**: GitHub API has rate limits (5000 requests/hour for authenticated users)
+- **Data Scope**: Fetches last 50 completed workflow runs (`per_page=50`)
+- **Workflow Filter**: Only monitors "Nightly Build" workflow (searches by name or path containing "nightly_build")
+
+### Caching Strategy
+
+- **Update Schedule**: Data refreshes only at 6am, 1pm, 7pm, and 11pm
+- **Storage**: Uses browser localStorage for persistence
+- **Cache Key**: `langflow_incident_data`
+- **Validation**: Cache expires automatically at next scheduled update time
+
+### Fallback Behavior
+
+- **API Failure**: Falls back to simulated data matching the GitHub screenshot
+- **Simulated Pattern**: 4 recent successes, 1 failure 4 days ago, then more successes
+- **Error Handling**: Shows error message if both API and fallback fail
+
+### Build Status Classification
+
+- **Success**: Only builds with `conclusion: "success"`
+- **Failure**: All other conclusions including:
+  - `"failure"`
+  - `"cancelled"`
+  - `"timed_out"`
+  - `"action_required"`
+  - `"neutral"`
+  - `"skipped"`
+
+### Recent Builds Display
+
+- **Count**: Shows last 10 builds
+- **Layout**: Grid layout (2 cols mobile, 3 cols tablet, 5 cols desktop)
+- **Information**: Date, run number, status icon, and status text
+- **Format**: "Jul 16 - #672" (date and run number)
 
 ## 🚀 Deployment
 
