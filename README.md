@@ -26,8 +26,8 @@ A beautiful React dashboard that monitors and displays the reliability of Langfl
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/yourusername/nightly-incidents.git
-   cd nightly-incidents
+   git clone https://github.com/Cristhianzl/nightly-check-lf.git
+   cd nightly-check-lf
    ```
 
 2. **Install dependencies**
@@ -255,12 +255,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need help, please:
 
-1. Check the [Issues](https://github.com/yourusername/nightly-incidents/issues) page
+1. Check the [Issues](https://github.com/Cristhianzl/nightly-check-lf/issues) page
 2. Create a new issue if your problem isn't already reported
 3. Include as much detail as possible in your issue
 
 ---
 
-**Built with ❤️ by the community**
+**Built with ❤️**
 
 _Monitoring build reliability, one day at a time._

@@ -258,6 +258,17 @@ export default function IncidentCounter() {
             Data updates at 6am, 1pm, 7pm & 11pm • Next update in:{" "}
             {nextUpdateIn}
           </p>
+          <p className="text-purple-300/40 text-xs mt-2">
+            <a
+              href="https://github.com/Cristhianzl/nightly-check-lf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 underline"
+            >
+              View Source Code
+            </a>{" "}
+            • Built with ❤️
+          </p>
         </motion.footer>
       </div>
     </div>
